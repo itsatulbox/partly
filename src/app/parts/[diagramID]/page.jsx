@@ -66,6 +66,32 @@ export default function DiagramPage() {
   const scaleX =
     imgNaturalSize.width > 0 ? DISPLAY_WIDTH / imgNaturalSize.width : 1;
 
+  const handleIncreaseQuantity = (partId) => {
+  const existingPart = cart.find(part => part.id === partId);
+  if (existingPart) {
+    addPart({
+      ...existingPart,
+      quantity: existingPart.quantity + 1
+    });
+  }
+};
+
+const handleDecreaseQuantity = (partId) => {
+  const existingPart = cart.find(part => part.id === partId);
+  if (existingPart) {
+    if (existingPart.quantity > 1) {
+      const updatedCart = cart.map(part => 
+        part.id === partId 
+          ? { ...part, quantity: part.quantity - 1 } 
+          : part
+      );
+      addPart(updatedCart.find(part => part.id === partId));
+    } else {
+      removePart(partId);
+    }
+  }
+};
+
   return (
     <div style={{ display: "flex", gap: "2rem", alignItems: "flex-start" }}>
       {/* Diagram and buttons */}
@@ -102,10 +128,11 @@ export default function DiagramPage() {
               }}
               title={assembly.description}
               onClick={() => {
+                // Always add exactly 1 item, regardless of assembly.quantity
                 addPart({
                   id: assembly.id,
                   description: assembly.description,
-                  quantity: assembly.quantity ?? 1,
+                  quantity: 1,
                 });
               }}
             />
@@ -132,22 +159,54 @@ export default function DiagramPage() {
             {cart.map((part) => (
               <li key={part.id} style={{ marginBottom: "0.5rem" }}>
                 <strong>{part.description}</strong>
-                <div style={{ fontSize: "0.85rem" }}>Qty: {part.quantity}</div>
-                <button
-                  onClick={() => removePart(part.id)}
-                  style={{
-                    marginTop: "4px",
-                    padding: "2px 6px",
-                    fontSize: "0.8rem",
-                    backgroundColor: "#ff6666",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Remove
-                </button>
+                <div style={{ fontSize: "0.85rem", marginTop: "4px" }}>
+                  <span>Qty: {part.quantity}</span>
+                  <div style={{ marginTop: "4px" }}>
+                    <button
+                      onClick={() => handleDecreaseQuantity(part.id)}
+                      style={{
+                        padding: "2px 6px",
+                        fontSize: "0.8rem",
+                        backgroundColor: "#ddd",
+                        border: "1px solid #ccc",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        marginRight: "4px",
+                      }}
+                    >
+                      -
+                    </button>
+                    <button
+                      onClick={() => handleIncreaseQuantity(part.id)}
+                      style={{
+                        padding: "2px 6px",
+                        fontSize: "0.8rem",
+                        backgroundColor: "#4CAF50",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        marginRight: "8px",
+                      }}
+                    >
+                      +
+                    </button>
+                    <button
+                      onClick={() => removePart(part.id)}
+                      style={{
+                        padding: "2px 6px",
+                        fontSize: "0.8rem",
+                        backgroundColor: "#ff6666",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
               </li>
             ))}
           </ul>
