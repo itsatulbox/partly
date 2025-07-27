@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Search, Zap, Eye, Download, Filter, Grid3X3, List } from "lucide-react";
+import { getDiagrams } from "@/api/api";
 
 export default function Home() {
   const {vehicleID} = useParams();
@@ -13,40 +14,47 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BASEURL}/api/v1/assemblies.v2.search`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              oem_vehicle_id: vehicleID,
-            }),
-          }
-        );
+    // const fetchData = async () => {
+    //   try {
+    //     setLoading(true);
+    //     const res = await fetch(
+    //       `${process.env.NEXT_PUBLIC_BASEURL}/api/v1/assemblies.v2.search`,
+    //       {
+    //         method: "POST",
+    //         headers: {
+    //           Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //           oem_vehicle_id: vehicleID,
+    //         }),
+    //       }
+    //     );
 
-        if (!res.ok) throw new Error("Failed to fetch data");
+    //     if (!res.ok) throw new Error("Failed to fetch data");
 
-        const json = await res.json();
-        setData(json);
-      } catch (err) {
-        console.error("Error fetching API data:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+    //     const json = await res.json();
+    //     setData(json);
+    //   } catch (err) {
+    //     console.error("Error fetching API data:", err);
+    //     setError(err.message);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
 
-    fetchData();
+
+    getDiagrams(vehicleID).then(res => {
+      setData(res);
+      setLoading(false);
+    })
+
+
+    // fetchData();
   }, []);
 
     const handleClick = (diagramID) => () => {
-        router.push(`/parts/diagramID=${diagramID}&vehicleID=${vehicleID}`);
+        router.push(`/parts/${diagramID}/${vehicleID}`);
     };
 
   const formatName = (name) => {

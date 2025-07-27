@@ -13,6 +13,8 @@ export default function SearchPage() {
 
     const router = useRouter();
 
+    console.log(vehicleID)
+
     // Search items data
     const searchItems = [
         // Vehicle Sections
@@ -107,7 +109,7 @@ export default function SearchPage() {
 
     const handleNext = () => {
         console.log('Next clicked with:', { vehicleID, selectedItem });
-        router.push(`/diagrams/${vehicleID}`)
+        router.push(`/diagram/${vehicleID}`)
     };
 
     return (

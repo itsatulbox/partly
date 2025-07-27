@@ -22,12 +22,21 @@ export function CartProvider({ children }) {
   }, [cart]);
 
   const addPart = (part) => {
-    setCart((prev) => {
-      // Avoid adding duplicate items
-      if (prev.some((item) => item.id === part.id)) return prev;
+  setCart((prev) => {
+    // Check if part already exists in cart
+    const existingIndex = prev.findIndex((item) => item.id === part.id);
+    
+    if (existingIndex >= 0) {
+      // If exists, update the quantity
+      const updatedCart = [...prev];
+      updatedCart[existingIndex] = part;
+      return updatedCart;
+    } else {
+      // If new, add to cart
       return [...prev, part];
-    });
-  };
+    }
+  });
+};
 
   const removePart = (id) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
