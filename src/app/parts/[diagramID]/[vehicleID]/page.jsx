@@ -3,11 +3,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
-import { ShoppingCart, Plus, Minus, Trash2, Package } from 'lucide-react';
+import { ShoppingCart, Plus, Minus, Trash2, Package } from "lucide-react";
 
 export default function DiagramPage() {
   const { diagramID, vehicleID } = useParams();
-  
+
   const [data, setData] = useState(null);
   const [imgNaturalSize, setImgNaturalSize] = useState({ width: 0, height: 0 });
   const imgRef = useRef(null);
@@ -46,6 +46,32 @@ export default function DiagramPage() {
 
   const diagram = data?.diagrams?.[diagramID];
   const assemblies = data?.assemblies ?? {};
+  const handleSendEmail = () => {
+    const subject = "Quote Request for Parts";
+
+    const body = `
+Hi,
+
+This is XYZ Automotives. We would like a quote for the following parts:
+
+${cart
+  .map(
+    (item) =>
+      `- ${item.description} (Quantity: ${item.quantity}, ID: ${item.id})`
+  )
+  .join("\n")}
+
+Please get back to us at your earliest convenience.
+
+Kind regards,
+XYZ Automotives
+`;
+
+    const mailtoLink = `mailto:parts@example.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
 
   if (!diagram) {
     return (
@@ -82,25 +108,23 @@ export default function DiagramPage() {
     imgNaturalSize.width > 0 ? DISPLAY_WIDTH / imgNaturalSize.width : 1;
 
   const handleIncreaseQuantity = (partId) => {
-    const existingPart = cart.find(part => part.id === partId);
+    const existingPart = cart.find((part) => part.id === partId);
     if (existingPart) {
       addPart({
         ...existingPart,
-        quantity: existingPart.quantity + 1
+        quantity: existingPart.quantity + 1,
       });
     }
   };
 
   const handleDecreaseQuantity = (partId) => {
-    const existingPart = cart.find(part => part.id === partId);
+    const existingPart = cart.find((part) => part.id === partId);
     if (existingPart) {
       if (existingPart.quantity > 1) {
-        const updatedCart = cart.map(part => 
-          part.id === partId 
-            ? { ...part, quantity: part.quantity - 1 } 
-            : part
+        const updatedCart = cart.map((part) =>
+          part.id === partId ? { ...part, quantity: part.quantity - 1 } : part
         );
-        addPart(updatedCart.find(part => part.id === partId));
+        addPart(updatedCart.find((part) => part.id === partId));
       } else {
         removePart(partId);
       }
@@ -114,7 +138,6 @@ export default function DiagramPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             Parts Diagram
           </h1>
@@ -129,9 +152,9 @@ export default function DiagramPage() {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-3xl shadow-xl p-8 border border-purple-100">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                {diagram.name || 'Vehicle Diagram'}
+                {diagram.name || "Vehicle Diagram"}
               </h2>
-              
+
               <div className="relative inline-block w-full">
                 <div className="bg-gray-50 rounded-2xl p-4 border-2 border-dashed border-gray-200">
                   <img
@@ -146,10 +169,12 @@ export default function DiagramPage() {
                   {assembliesWithHotspots.map((assembly) => {
                     const { top_left, bottom_right } = assembly.hotspot;
                     const padding = 4; // Add padding to make boxes bigger
-                    const left = (top_left.x * scaleX) - padding;
-                    const top = (top_left.y * scaleX) - (padding*0.5);
-                    const width = ((bottom_right.x - top_left.x) * scaleX) + (padding * 3);
-                    const height = ((bottom_right.y - top_left.y) * scaleX) + (padding * 2);
+                    const left = top_left.x * scaleX - padding;
+                    const top = top_left.y * scaleX - padding * 0.5;
+                    const width =
+                      (bottom_right.x - top_left.x) * scaleX + padding * 3;
+                    const height =
+                      (bottom_right.y - top_left.y) * scaleX + padding * 2;
 
                     return (
                       <button
@@ -157,7 +182,7 @@ export default function DiagramPage() {
                         className="absolute border-2 border-purple-500 hover:border-purple-600 bg-purple-500/20 hover:bg-purple-600/30 transition-all duration-200 hover:shadow-lg"
                         style={{
                           left: left + 16, // Offset for padding
-                          top: top + 16,   // Offset for padding
+                          top: top + 16, // Offset for padding
                           width: width,
                           height: height,
                         }}
@@ -187,7 +212,9 @@ export default function DiagramPage() {
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900">Cart</h3>
                   {totalItems > 0 && (
-                    <p className="text-sm text-gray-600">{totalItems} item{totalItems !== 1 ? 's' : ''}</p>
+                    <p className="text-sm text-gray-600">
+                      {totalItems} item{totalItems !== 1 ? "s" : ""}
+                    </p>
                   )}
                 </div>
               </div>
@@ -198,16 +225,22 @@ export default function DiagramPage() {
                     <ShoppingCart className="w-8 h-8 text-gray-400" />
                   </div>
                   <p className="text-gray-500 text-lg">No parts added yet</p>
-                  <p className="text-gray-400 text-sm mt-2">Click on the highlighted areas in the diagram to add parts</p>
+                  <p className="text-gray-400 text-sm mt-2">
+                    Click on the highlighted areas in the diagram to add parts
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {cart.map((part) => (
-                    <div key={part.id} className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                    <div
+                      key={part.id}
+                      className="bg-gray-50 rounded-2xl p-4 border border-gray-100"
+                    >
                       <h4 className="font-semibold text-gray-900 mb-3 text-sm leading-tight">
-                        {part.description || "Unclassified Part" + " (ID: " + part.id + ")"}
+                        {part.description ||
+                          "Unclassified Part" + " (ID: " + part.id + ")"}
                       </h4>
-                      
+
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <button
@@ -216,11 +249,11 @@ export default function DiagramPage() {
                           >
                             <Minus className="w-4 h-4 text-gray-600" />
                           </button>
-                          
+
                           <span className="bg-white px-3 py-1 rounded-lg font-semibold text-gray-900 min-w-[3rem] text-center border border-gray-200">
                             {part.quantity}
                           </span>
-                          
+
                           <button
                             onClick={() => handleIncreaseQuantity(part.id)}
                             className="w-8 h-8 bg-purple-600 hover:bg-purple-700 rounded-lg flex items-center justify-center transition-colors duration-200"
@@ -228,7 +261,7 @@ export default function DiagramPage() {
                             <Plus className="w-4 h-4 text-white" />
                           </button>
                         </div>
-                        
+
                         <button
                           onClick={() => removePart(part.id)}
                           className="w-8 h-8 bg-red-100 hover:bg-red-200 rounded-lg flex items-center justify-center transition-colors duration-200"
@@ -239,12 +272,12 @@ export default function DiagramPage() {
                       </div>
                     </div>
                   ))}
-                  
+
                   <button
-                    onClick={clearCart}
-                    className="w-full mt-6 py-3 px-6 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
+                    onClick={handleSendEmail}
+                    className="w-full mt-4 py-3 px-6 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
                   >
-                    Clear Cart
+                    Send Cart via Email
                   </button>
                 </div>
               )}
