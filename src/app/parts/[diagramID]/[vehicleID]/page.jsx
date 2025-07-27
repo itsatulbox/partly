@@ -140,7 +140,7 @@ XYZ Automotives
             Parts Diagram
           </h1>
           <p className="text-gray-600 text-lg">
-            Click on the highlighted areas to add parts to your cart
+            Click on the highlighted areas to add parts to your list
           </p>
         </div>
 
@@ -208,7 +208,9 @@ XYZ Automotives
                   <ShoppingCart className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Cart</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Parts List
+                  </h3>
                   {totalItems > 0 && (
                     <p className="text-sm text-gray-600">
                       {totalItems} item{totalItems !== 1 ? "s" : ""}
@@ -275,7 +277,7 @@ XYZ Automotives
                     onClick={handleSendEmail}
                     className="w-full mt-4 py-3 px-6 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
                   >
-                    Send Cart via Email
+                    Send List via Email
                   </button>
                 </div>
               )}
