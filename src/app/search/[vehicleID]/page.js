@@ -107,7 +107,7 @@ export default function SearchPage() {
 
     const handleNext = () => {
         console.log('Next clicked with:', { vehicleID, selectedItem });
-        router.push(`/diagrams/${vehicleID}`)
+        router.push(`/diagram/${vehicleID}`)
     };
 
     return (
