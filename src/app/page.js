@@ -33,7 +33,7 @@ export default function LicenseEnteringPage() {
 
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white p-4 md:p-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white p-4 md:p-8">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
@@ -47,16 +47,11 @@ export default function LicenseEnteringPage() {
                         
                         ></Image>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-              My Garage
-            </h1>
-            <p className="text-gray-600 text-lg">
-              Add your vehicles here to shop products that fit.
-            </p>
+            
           </div>
 
           {/* Main Content */}
-          <div className="bg-white rounded-3xl shadow-xl p-8 mb-8 border border-purple-100">
+          <div className="bg-white rounded-3xl shadow-xl p-8 mb-8 border border-blue-100">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
               Let's start by adding your vehicle.
             </h2>
@@ -115,7 +110,7 @@ export default function LicenseEnteringPage() {
                   disabled={!licensePlate.trim()}
                   className={`w-full mt-6 py-4 px-8 rounded-2xl font-semibold text-lg transition-all duration-300 ${
                       licensePlate.trim()
-                          ? 'bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1'
+                          ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1'
                           : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                   } ${isAnimating ? 'animate-pulse' : ''}`}
               >
