@@ -73,11 +73,11 @@ XYZ Automotives
 
   if (!diagram) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white p-4 md:p-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white p-4 md:p-8">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-3xl shadow-xl p-8 border border-purple-100">
+          <div className="bg-white rounded-3xl shadow-xl p-8 border border-blue-100">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl mb-6 shadow-lg">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl mb-6 shadow-lg">
                 <Package className="w-8 h-8 text-white animate-pulse" />
               </div>
               <p className="text-lg text-gray-600">Loading diagram...</p>
@@ -132,7 +132,7 @@ XYZ Automotives
   const totalItems = cart.reduce((sum, part) => sum + part.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -148,7 +148,7 @@ XYZ Automotives
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Diagram Section */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-3xl shadow-xl p-8 border border-purple-100">
+            <div className="bg-white rounded-3xl shadow-xl p-8 border border-blue-100">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 {diagram.name || "Vehicle Diagram"}
               </h2>
@@ -177,7 +177,7 @@ XYZ Automotives
                     return (
                       <button
                         key={assembly.id}
-                        className="absolute border-2 border-purple-500 hover:border-purple-600 bg-purple-500/20 hover:bg-purple-600/30 transition-all duration-200 hover:shadow-lg"
+                        className="absolute border-2 border-blue-500 hover:border-blue-600 bg-blue-500/20 hover:bg-blue-600/30 transition-all duration-200 hover:shadow-lg"
                         style={{
                           left: left + 16, // Offset for padding
                           top: top + 16, // Offset for padding
@@ -202,9 +202,9 @@ XYZ Automotives
 
           {/* Cart Section */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl shadow-xl p-8 border border-purple-100 sticky top-8">
+            <div className="bg-white rounded-3xl shadow-xl p-8 border border-blue-100 sticky top-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl shadow-lg">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg">
                   <ShoppingCart className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -256,7 +256,7 @@ XYZ Automotives
 
                           <button
                             onClick={() => handleIncreaseQuantity(part.id)}
-                            className="w-8 h-8 bg-purple-600 hover:bg-purple-700 rounded-lg flex items-center justify-center transition-colors duration-200"
+                            className="w-8 h-8 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center justify-center transition-colors duration-200"
                           >
                             <Plus className="w-4 h-4 text-white" />
                           </button>
@@ -275,7 +275,7 @@ XYZ Automotives
 
                   <button
                     onClick={handleSendEmail}
-                    className="w-full mt-4 py-3 px-6 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
+                    className="w-full mt-4 py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
                   >
                     Send List via Email
                   </button>
