@@ -118,7 +118,7 @@ export default function SearchPage() {
             {/* Header Icon */}
             
           <Image
-            src="/image.png"
+            src="/RepairIt_Image.webp"
             alt="Logo"
             className="w-80 h-40 object-contain mb-6"
             width={80}
@@ -130,11 +130,7 @@ export default function SearchPage() {
             
             
 
-            {/* Title and Subtitle */}
-            <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold text-gray-900 mb-3">RepairIt</h1>
-               
-            </div>
+            
 
             {/* Main Card */}
             <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-2xl flex-1 flex flex-col overflow-hidden">

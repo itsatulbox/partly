@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Search, Zap, Eye, Download, Filter, Grid3X3, List } from "lucide-react";
 import { getDiagrams } from "@/api/api";
+import Image from "next/image";
 
 export default function Home() {
   const {vehicleID} = useParams();
