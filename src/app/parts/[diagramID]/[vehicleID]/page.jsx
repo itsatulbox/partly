@@ -55,13 +55,11 @@ Hi,
 This is XYZ Automotives. We would like a quote for the following parts:
 
 ${cart
-  .map(
-    (item) =>
-      `- ${item.description} (Quantity: ${item.quantity}, ID: ${item.id})`
-  )
+  .map((item) => {
+    const description = item.description?.trim() || "Unclassified Product";
+    return `- ${description} (Quantity: ${item.quantity}, ID: ${item.id})`;
+  })
   .join("\n")}
-
-Please get back to us at your earliest convenience.
 
 Kind regards,
 XYZ Automotives
