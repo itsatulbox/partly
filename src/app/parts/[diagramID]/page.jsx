@@ -113,14 +113,12 @@ export default function DiagramPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl mb-6 shadow-lg">
-            <Package className="w-8 h-8 text-white" />
-          </div>
+          
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             Parts Diagram
           </h1>
           <p className="text-gray-600 text-lg">
-            Click on the red dots to add parts to your cart
+            Click on the highlighted areas to add parts to your cart
           </p>
         </div>
 
@@ -146,18 +144,21 @@ export default function DiagramPage() {
 
                   {assembliesWithHotspots.map((assembly) => {
                     const { top_left, bottom_right } = assembly.hotspot;
-                    const left = (top_left.x + bottom_right.x) / 2;
-                    const top = (top_left.y + bottom_right.y) / 2;
-                    const leftPos = left * scaleX;
-                    const topPos = top * scaleX;
+                    const padding = 4; // Add padding to make boxes bigger
+                    const left = (top_left.x * scaleX) - padding;
+                    const top = (top_left.y * scaleX) - (padding*0.5);
+                    const width = ((bottom_right.x - top_left.x) * scaleX) + (padding * 3);
+                    const height = ((bottom_right.y - top_left.y) * scaleX) + (padding * 2);
 
                     return (
                       <button
                         key={assembly.id}
-                        className="absolute w-6 h-6 bg-red-500 hover:bg-red-600 border-2 border-white rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-all duration-200 hover:scale-110 shadow-lg hover:shadow-xl"
+                        className="absolute border-2 border-purple-500 hover:border-purple-600 bg-purple-500/20 hover:bg-purple-600/30 transition-all duration-200 hover:shadow-lg"
                         style={{
-                          left: leftPos + 16, // Offset for padding
-                          top: topPos + 16,   // Offset for padding
+                          left: left + 16, // Offset for padding
+                          top: top + 16,   // Offset for padding
+                          width: width,
+                          height: height,
                         }}
                         title={assembly.description}
                         onClick={() => {
@@ -167,9 +168,7 @@ export default function DiagramPage() {
                             quantity: 1,
                           });
                         }}
-                      >
-                        <Plus className="w-3 h-3 text-white mx-auto" />
-                      </button>
+                      />
                     );
                   })}
                 </div>
@@ -198,15 +197,15 @@ export default function DiagramPage() {
                     <ShoppingCart className="w-8 h-8 text-gray-400" />
                   </div>
                   <p className="text-gray-500 text-lg">No parts added yet</p>
-                  <p className="text-gray-400 text-sm mt-2">Click on the red dots in the diagram to add parts</p>
+                  <p className="text-gray-400 text-sm mt-2">Click on the highlighted areas in the diagram to add parts</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {cart.map((part) => (
                     <div key={part.id} className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
                       <h4 className="font-semibold text-gray-900 mb-3 text-sm leading-tight">
-  {part.description || part.id}
-</h4>
+                        {part.description || "Unclassified Part" + " (ID: " + part.id + ")"}
+                      </h4>
                       
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
