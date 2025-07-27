@@ -54,7 +54,7 @@ export default function Home() {
   }, []);
 
     const handleClick = (diagramID) => () => {
-        router.push(`/parts/diagramID=${diagramID}&vehicleID=${vehicleID}`);
+        router.push(`/parts/${diagramID}/${vehicleID}`);
     };
 
   const formatName = (name) => {
