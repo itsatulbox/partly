@@ -32,4 +32,17 @@ export async function getVehicleInformation(licensePlate) {
     return response.data;
 }
 
+export async function getDiagrams(vehicleID) {
+
+  const requestBody = {
+    oem_vehicle_id: vehicleID,
+  }
+
+  apiClient.defaults.headers.common['Authorization'] = `Bearer ${apiKey}`;
+
+  const response = await apiClient.post('/api/v1/assemblies.v2.search', requestBody);
+  return response.data;
+}
+
+
 export default apiClient;

@@ -13,6 +13,8 @@ export default function SearchPage() {
 
     const router = useRouter();
 
+    console.log(vehicleID)
+
     // Search items data
     const searchItems = [
         // Vehicle Sections
