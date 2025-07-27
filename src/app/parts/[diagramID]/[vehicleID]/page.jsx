@@ -3,7 +3,9 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
-import { ShoppingCart, Plus, Minus, Trash2, Package } from "lucide-react";
+import { ShoppingCart, Plus, Minus, Trash2, Package } from 'lucide-react';
+import Image from "next/image";
+
 
 export default function DiagramPage() {
   const { diagramID, vehicleID } = useParams();
@@ -135,7 +137,18 @@ XYZ Automotives
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 justify-center ">
+
+          <div className="flex justify-center">
+    <Image
+      src="/RepairIt_Image.webp"
+      alt="Logo"
+      className="w-80 h-40 object-contain mb-6"
+      width={80}
+      height={40}
+    />
+  </div>
+          
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             Parts Diagram
           </h1>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Search, Car } from 'lucide-react';
-
+import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import {getVehicleInformation} from "@/api/api";
 
@@ -37,15 +37,17 @@ export default function LicenseEnteringPage() {
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl mb-6 shadow-lg">
-              <Car className="w-8 h-8 text-white" />
+            <div className="inline-flex items-center justify-center w-80 h-40  rounded-2xl mb-6 ">
+              <Image
+                          src="/RepairIt_Image.webp"
+                          alt="Logo"
+                          className="w-80 h-40 object-contain mb-6"
+                          width={80}
+                          height={40}
+                        
+                        ></Image>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-              My Garage
-            </h1>
-            <p className="text-gray-600 text-lg">
-              Add your vehicles here to shop products that fit.
-            </p>
+            
           </div>
 
           {/* Main Content */}
