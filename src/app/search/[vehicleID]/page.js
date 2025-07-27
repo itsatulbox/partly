@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image";
 import {useParams, useRouter} from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 
@@ -115,31 +116,30 @@ export default function SearchPage() {
     return (
         <div className="h-screen bg-gray-50 flex flex-col items-center py-12 px-4 overflow-hidden">
             {/* Header Icon */}
-            <div className="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg">
-                <span className="text-white text-2xl">🔍</span>
-            </div>
+            
+          <Image
+            src="/image.png"
+            alt="Logo"
+            className="w-80 h-40 object-contain mb-6"
+            width={80}
+            height={40}
+          
+          ></Image>
+
+
+            
+            
 
             {/* Title and Subtitle */}
             <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold text-gray-900 mb-3">Search Vehicle Parts</h1>
-                <p className="text-gray-600 text-lg">Find the right parts for your {vehicleID}</p>
+                <h1 className="text-4xl font-bold text-gray-900 mb-3">RepairIt</h1>
+               
             </div>
 
             {/* Main Card */}
             <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-2xl flex-1 flex flex-col overflow-hidden">
                 {/* Vehicle Info Section */}
-                <div className="mb-8">
-                    <h2 className="text-2xl font-semibold text-gray-900 mb-6">Current Vehicle</h2>
-                    <div className="flex items-center space-x-4">
-                        <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center">
-                            <span className="text-2xl text-gray-600">🚗</span>
-                        </div>
-                        <div>
-                            <p className="font-medium text-lg text-gray-900">Vehicle ID: {vehicleID}</p>
-                            <p className="text-gray-600">Ready to search for parts</p>
-                        </div>
-                    </div>
-                </div>
+                
 
                 {/* Search Section */}
                 <div className="flex-1 flex flex-col overflow-hidden">
@@ -204,7 +204,7 @@ export default function SearchPage() {
 
                     {/* Selected Item Display */}
                     {selectedItem && (
-                        <div className="mt-8 p-6 bg-gray-50 rounded-2xl border border-gray-200">
+                        <div className="mt-8 mb-8 p-6 bg-gray-50 rounded-2xl border border-gray-200">
                             <div className="flex items-center justify-between">
                                 <div>
                                     <h4 className="font-semibold text-gray-900 text-xl">{selectedItem.name}</h4>
